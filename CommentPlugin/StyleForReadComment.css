@@ -1,0 +1,6 @@
+.customCommentButton {color:#003399;}
+.contentTableCommentTitle {margin-top:10px;margin-bottom:10px;padding-top:10px;padding-bottom:10px;}
+.contentTableCommentTitleDate {color:#003399;text-decoration:underline;font-weight:bold;padding-top:10px;padding-bottom:5px;}
+.contentTableCommentTitleUser {color:#003399;font-weight:bold;padding-top:2px;padding-bottom:5px;}
+.contentTableCommentTitleUserComments {color:#003399;padding-top:2px;padding-bottom:5px;}
+.contentTableCommentTextTd {max-width:300px;padding-left:10px;}

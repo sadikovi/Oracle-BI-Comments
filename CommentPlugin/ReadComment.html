@@ -1,0 +1,28 @@
+<script src="/analyticsRes/res/js/jquery-1.7.1.min.js"></script>
+<script src="/analyticsRes/res/js/CommentPlugin.js"></script>
+<link rel="stylesheet" type="text/css" href="/analyticsRes/res/css/StyleForReadComment.css"></link>
+<script type="text/javascript">
+//Span.customCommentButton Events
+jQuery('span.customCommentButton').mouseover(function() {
+	jQuery(this).removeClass('clickedButton').addClass('unclickedButton');
+}).mouseout(function() {
+	jQuery(this).removeClass('unclickedButton');
+}).click(function() {
+	if (jQuery(this).hasClass('unclickedButton')) {
+		sitLoadComment(this, null); //Load comments data
+		jQuery(this).removeClass('unclickedButton').addClass('clickedButton');
+	}
+	if (jQuery(this).hasClass('clickedButton')) {
+		jQuery(this).removeClass('clickedButton').addClass('unclickedButton');
+			//Remove scrollable panel
+		jQuery('div.HeaderPopupWindow').remove();
+	}
+});
+
+//Document.body events
+jQuery('html').click(function() {
+	jQuery('span.customCommentButton').removeClass('clickedButton').addClass('unclickedButton');
+		//Remove scrollable panel
+	jQuery('div.HeaderPopupWindow').remove();
+});
+</script>

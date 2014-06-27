@@ -1,0 +1,29 @@
+<script src="/analyticsRes/res/js/jquery-1.7.1.min.js"></script>
+<script src="/analyticsRes/res/js/CommentPlugin.js"></script>
+<link rel="stylesheet" type="text/css" href="res/s_blafp/uicomponents/obips.FormFields/obips.FormFields.css"></link>
+<script type="text/javascript">
+//Actions for current button (change class and show Comment Editor Form)
+jQuery('span.ShowCommentDialogWindow').mouseover(function(){
+	jQuery(this).addClass('Active');
+	var obj = this;
+		obj.onclick = function(event) {
+			sitWriteComment(obj, event);
+		};
+}).mouseout(function() {
+	jQuery(this).removeClass('Active');
+});
+</script>
+
+<div id="idDiv" class="dialogBody" style="display: none;">
+	¬ведите текст комментари€
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<textarea id="sitComment" value="" autofocus type="text" style="border:1px solid #999999;width:300px;height:200px;">
+					</textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
