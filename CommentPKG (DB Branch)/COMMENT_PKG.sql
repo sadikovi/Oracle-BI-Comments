@@ -1,15 +1,15 @@
 create or replace package COMMENT_PKG is
 -----------------------------------------------------------------------------
--- isadikov 15.08.2012: пакет создан
--- isadikov 21.08.2012: убрано логгирование
--- isadikov 29.08.2012: добавлена процедура удаления комментария
--- isadikov 13.09.2012: добавлена функция  fnc_url_decode
--- isadikov 14.09.2012: добавлена функция fnc_url_encode
+-- isadikov 15.08.2012: ГЇГ ГЄГҐГІ Г±Г®Г§Г¤Г Г­
+-- isadikov 21.08.2012: ГіГЎГ°Г Г­Г® Г«Г®ГЈГЈГЁГ°Г®ГўГ Г­ГЁГҐ
+-- isadikov 29.08.2012: Г¤Г®ГЎГ ГўГ«ГҐГ­Г  ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  ГіГ¤Г Г«ГҐГ­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
+-- isadikov 13.09.2012: Г¤Г®ГЎГ ГўГ«ГҐГ­Г  ГґГіГ­ГЄГ¶ГЁГї  fnc_url_decode
+-- isadikov 14.09.2012: Г¤Г®ГЎГ ГўГ«ГҐГ­Г  ГґГіГ­ГЄГ¶ГЁГї fnc_url_encode
 -----------------------------------------------------------------------------
 
-  --процедура загрузки комментария
-  --входные параметры: пользователь, название отчета, текст комментария, строка с параметрами
-  --строка с параметрами имеет вид (разделитель ";"):
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЈГ°ГіГ§ГЄГЁ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
+  --ГўГµГ®Г¤Г­Г»ГҐ ГЇГ Г°Г Г¬ГҐГІГ°Г»: ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј, Г­Г Г§ГўГ Г­ГЁГҐ Г®ГІГ·ГҐГІГ , ГІГҐГЄГ±ГІ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї, Г±ГІГ°Г®ГЄГ  Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
+  --Г±ГІГ°Г®ГЄГ  Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ ГЁГ¬ГҐГҐГІ ГўГЁГ¤ (Г°Г Г§Г¤ГҐГ«ГЁГІГҐГ«Гј ";"):
   --p1=Region;p2=Region Value;p3=City;p4=City Value;p5=Week;p6=52th Week
   procedure write_comment(
     p_username in f013_comments.f013_user%type,
@@ -18,29 +18,29 @@ create or replace package COMMENT_PKG is
     p_parameters in varchar2
   );
 
-  --функция возврата комментария для имени отчета и строки с параметрами
-  --строка с параметрами имеет вид (разделитель ";"):
+  --ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г ГІГ  ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї Г¤Г«Гї ГЁГ¬ГҐГ­ГЁ Г®ГІГ·ГҐГІГ  ГЁ Г±ГІГ°Г®ГЄГЁ Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
+  --Г±ГІГ°Г®ГЄГ  Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ ГЁГ¬ГҐГҐГІ ГўГЁГ¤ (Г°Г Г§Г¤ГҐГ«ГЁГІГҐГ«Гј ";"):
   --p1=Region;p2=Region Value;p3=City;p4=City Value;p5=Week;p6=52th Week
-  --возвращает таблицу с полями: номер строки, пользователь, комментарий, дата создания комментария
+  --ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГІГ ГЎГ«ГЁГ¶Гі Г± ГЇГ®Г«ГїГ¬ГЁ: Г­Г®Г¬ГҐГ° Г±ГІГ°Г®ГЄГЁ, ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј, ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГ©, Г¤Г ГІГ  Г±Г®Г§Г¤Г Г­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
   function get_comment (
     p_report_name in f013_comments.f013_report_name%type,
     p_parameters in varchar2
   )
   return comment_table_type pipelined;
 
-  --процедура удаления комментария для имени пользователя, названия отчета,
-  --даты добавления отчета и текста комментария
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  ГіГ¤Г Г«ГҐГ­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї Г¤Г«Гї ГЁГ¬ГҐГ­ГЁ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї, Г­Г Г§ГўГ Г­ГЁГї Г®ГІГ·ГҐГІГ ,
+  --Г¤Г ГІГ» Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї Г®ГІГ·ГҐГІГ  ГЁ ГІГҐГЄГ±ГІГ  ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
   procedure delete_comment (
     p_username in f013_comments.f013_user%type,
     p_comment_id in f013_comments.comment_id%type
   );
-  --функция декодирования строки из URL type
+  --ГґГіГ­ГЄГ¶ГЁГї Г¤ГҐГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї Г±ГІГ°Г®ГЄГЁ ГЁГ§ URL type
   function fnc_url_decode (
     p_str in varchar2
   )
   return varchar2;
   
-  --функция преобразования строки в URL type
+  --ГґГіГ­ГЄГ¶ГЁГї ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГї Г±ГІГ°Г®ГЄГЁ Гў URL type
   function fnc_url_encode(
     p_str in varchar2
   )
@@ -51,7 +51,7 @@ end COMMENT_PKG;
 create or replace package body COMMENT_PKG is
 
   --isadikov: 13.09.2012
-  --Функия декодирования строки вида "%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82" в "Привет"
+  --Г”ГіГ­ГЄГЁГї Г¤ГҐГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї Г±ГІГ°Г®ГЄГЁ ГўГЁГ¤Г  "%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82" Гў "ГЏГ°ГЁГўГҐГІ"
   function fnc_url_decode (
     p_str in varchar2
   )
@@ -63,14 +63,14 @@ create or replace package body COMMENT_PKG is
     l_symbol varchar2(128) :='';
     current_element varchar2(255) :='';
   begin
-    p_str_1 := replace(p_str, '%C2%A0', '%20'); -- не получается обработать пробелы C2A0
-    --Пробегаем по входной строке
+    p_str_1 := replace(p_str, '%C2%A0', '%20'); -- Г­ГҐ ГЇГ®Г«ГіГ·Г ГҐГІГ±Гї Г®ГЎГ°Г ГЎГ®ГІГ ГІГј ГЇГ°Г®ГЎГҐГ«Г» C2A0
+    --ГЏГ°Г®ГЎГҐГЈГ ГҐГ¬ ГЇГ® ГўГµГ®Г¤Г­Г®Г© Г±ГІГ°Г®ГЄГҐ
     while l_index < length(p_str)
       loop
         l_index := l_index + 1;
-        --выбираем текущий символ
-        --если он равен '%', то мы понимаем, что это какой-то символ или кириллица
-        --Для кириллицы символ всегда представим в виде "%D0%AB" или "D1%AB" 
+        --ГўГ»ГЎГЁГ°Г ГҐГ¬ ГІГҐГЄГіГ№ГЁГ© Г±ГЁГ¬ГўГ®Г«
+        --ГҐГ±Г«ГЁ Г®Г­ Г°Г ГўГҐГ­ '%', ГІГ® Г¬Г» ГЇГ®Г­ГЁГ¬Г ГҐГ¬, Г·ГІГ® ГЅГІГ® ГЄГ ГЄГ®Г©-ГІГ® Г±ГЁГ¬ГўГ®Г« ГЁГ«ГЁ ГЄГЁГ°ГЁГ«Г«ГЁГ¶Г 
+        --Г„Г«Гї ГЄГЁГ°ГЁГ«Г«ГЁГ¶Г» Г±ГЁГ¬ГўГ®Г« ГўГ±ГҐГЈГ¤Г  ГЇГ°ГҐГ¤Г±ГІГ ГўГЁГ¬ Гў ГўГЁГ¤ГҐ "%D0%AB" ГЁГ«ГЁ "D1%AB" 
         l_symbol := substr(p_str_1, l_index, 1);
         if l_symbol = '%' then
           if substr(p_str_1, l_index +1, 2) = 'D0' or substr(p_str_1, l_index +1, 2) = 'D1' then
@@ -83,15 +83,15 @@ create or replace package body COMMENT_PKG is
             l_index := l_index + 2;
           end if;       
         end if;
-        --собираем строку посимвольно
+        --Г±Г®ГЎГЁГ°Г ГҐГ¬ Г±ГІГ°Г®ГЄГі ГЇГ®Г±ГЁГ¬ГўГ®Г«ГјГ­Г®
         l_string := l_string || l_symbol;
       end loop;
     return l_string;
   end fnc_url_decode;
   
   --isadikov: 14.09.2012
-  --функция кодирования в URL type
-  --строки вида "Привет" в "%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
+  --ГґГіГ­ГЄГ¶ГЁГї ГЄГ®Г¤ГЁГ°Г®ГўГ Г­ГЁГї Гў URL type
+  --Г±ГІГ°Г®ГЄГЁ ГўГЁГ¤Г  "ГЏГ°ГЁГўГҐГІ" Гў "%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82"
   function fnc_url_encode(
     p_str in varchar2
   )
@@ -134,8 +134,8 @@ create or replace package body COMMENT_PKG is
     return l_string;
   end fnc_url_encode;
   
-  --функция замены спецсимволов для формирования комментариев
-  --надо допилить до нормального состояния
+  --ГґГіГ­ГЄГ¶ГЁГї Г§Г Г¬ГҐГ­Г» Г±ГЇГҐГ¶Г±ГЁГ¬ГўГ®Г«Г®Гў Г¤Г«Гї ГґГ®Г°Г¬ГЁГ°Г®ГўГ Г­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГҐГў
+  --Г­Г Г¤Г® Г¤Г®ГЇГЁГ«ГЁГІГј Г¤Г® Г­Г®Г°Г¬Г Г«ГјГ­Г®ГЈГ® Г±Г®Г±ГІГ®ГїГ­ГЁГї
   function fnc_symb_replace (
     p_str in varchar2
   )
@@ -144,21 +144,21 @@ create or replace package body COMMENT_PKG is
     l_str f013_comments.f013_comment%type :='';
   begin
     l_str := p_str;
-    --1. Заменяем символы break_line на \u000A (или \n\r)
+    --1. Г‡Г Г¬ГҐГ­ГїГҐГ¬ Г±ГЁГ¬ГўГ®Г«Г» break_line Г­Г  \u000A (ГЁГ«ГЁ \n\r)
     l_str := replace(l_str, chr(10), '\u000A');
-    --2. Заменяем символы " на \u0022
+    --2. Г‡Г Г¬ГҐГ­ГїГҐГ¬ Г±ГЁГ¬ГўГ®Г«Г» " Г­Г  \u0022
     l_str := replace(l_str, '"', '\u0022');
-    --возвращаем преобразованную строку
+    --ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­Г­ГіГѕ Г±ГІГ°Г®ГЄГі
     return l_str;  
   end fnc_symb_replace;
   
-  --процедура заполнения таблицы b009_attr_attr_group
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» b009_attr_attr_group
   procedure load_b009 (
     p_attribute_id in d035_attribute.attribute_id%type,
     p_attribute_group_id in d033_attribute_group.attribute_group_id%type
   )
   is
-    --флаг, сигнализирующий о наличии комбинации attribute_id и attribute_group_id в таблице b009
+    --ГґГ«Г ГЈ, Г±ГЁГЈГ­Г Г«ГЁГ§ГЁГ°ГіГѕГ№ГЁГ© Г® Г­Г Г«ГЁГ·ГЁГЁ ГЄГ®Г¬ГЎГЁГ­Г Г¶ГЁГЁ attribute_id ГЁ attribute_group_id Гў ГІГ ГЎГ«ГЁГ¶ГҐ b009
     flg number(1) :=0;
   begin
     select
@@ -175,13 +175,13 @@ create or replace package body COMMENT_PKG is
 
   exception
     when others then
-      --при отсуствии такой комбинации id-шников, происходит вставка записи в таблицу b009
+      --ГЇГ°ГЁ Г®ГІГ±ГіГ±ГІГўГЁГЁ ГІГ ГЄГ®Г© ГЄГ®Г¬ГЎГЁГ­Г Г¶ГЁГЁ id-ГёГ­ГЁГЄГ®Гў, ГЇГ°Г®ГЁГ±ГµГ®Г¤ГЁГІ ГўГ±ГІГ ГўГЄГ  Г§Г ГЇГЁГ±ГЁ Гў ГІГ ГЎГ«ГЁГ¶Гі b009
       insert into b009_attr_attr_group values(p_attribute_id, p_attribute_group_id);
       commit;
 
   end load_b009;
 
-  --процедура заполнения таблицы d035_attribute
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» d035_attribute
   procedure load_d035 (
     p_parameters in varchar2,
     p_attribute_group_id in d033_attribute_group.attribute_group_id%type
@@ -196,29 +196,29 @@ create or replace package body COMMENT_PKG is
     current_parameter varchar2(255) :='';
     current_value varchar2(4000) :='';
   begin
-    --распарсиваем строку с параметрами
+    --Г°Г Г±ГЇГ Г°Г±ГЁГўГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
     current_index := fnc_get_next_word(p_parameters,current_index + 1,';', current_element);
 
     while current_element is not null
       loop
         begin
-          --формируем маску типа "p2="
+          --ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ Г¬Г Г±ГЄГі ГІГЁГЇГ  "p2="
           mask := 'p'|| to_char(mask_index) || '=';
-          --убираем первый элемент строки с параметрами, содержащий данные о количестве параметров
+          --ГіГЎГЁГ°Г ГҐГ¬ ГЇГҐГ°ГўГ»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ Г±ГІГ°Г®ГЄГЁ Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ, Г±Г®Г¤ГҐГ°Г¦Г Г№ГЁГ© Г¤Г Г­Г­Г»ГҐ Г® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГҐ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
           if (current_element not like 'p0=%') then
             current_element := replace(current_element, mask, '');
 
-            --параметр всегда идет под нечетным индексом
-            --значение параметра - под четным
+            --ГЇГ Г°Г Г¬ГҐГІГ° ГўГ±ГҐГЈГ¤Г  ГЁГ¤ГҐГІ ГЇГ®Г¤ Г­ГҐГ·ГҐГІГ­Г»Г¬ ГЁГ­Г¤ГҐГЄГ±Г®Г¬
+            --Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГ Г°Г Г¬ГҐГІГ°Г  - ГЇГ®Г¤ Г·ГҐГІГ­Г»Г¬
             if (mod(mask_index,2) != 0) then
               current_parameter := current_element;
             else
               current_value := current_element;
 
-              --по окончанию записи значения в current_value можно заполнить таблицу d035_attribute
-              --так как получаем "параметр-значение"
+              --ГЇГ® Г®ГЄГ®Г­Г·Г Г­ГЁГѕ Г§Г ГЇГЁГ±ГЁ Г§Г­Г Г·ГҐГ­ГЁГї Гў current_value Г¬Г®Г¦Г­Г® Г§Г ГЇГ®Г«Г­ГЁГІГј ГІГ ГЎГ«ГЁГ¶Гі d035_attribute
+              --ГІГ ГЄ ГЄГ ГЄ ГЇГ®Г«ГіГ·Г ГҐГ¬ "ГЇГ Г°Г Г¬ГҐГІГ°-Г§Г­Г Г·ГҐГ­ГЁГҐ"
               select seq_dim.nextval into parameter_id from dual;
-              --мерджим записи
+              --Г¬ГҐГ°Г¤Г¦ГЁГ¬ Г§Г ГЇГЁГ±ГЁ
               merge into d035_attribute using
               (select
                   parameter_id as id,
@@ -248,8 +248,8 @@ create or replace package body COMMENT_PKG is
 
               commit;
 
-              --берем текущие current_parameter и current_value
-              --и определяем id, соответсвующий этой паре "параметр-значение"
+              --ГЎГҐГ°ГҐГ¬ ГІГҐГЄГіГ№ГЁГҐ current_parameter ГЁ current_value
+              --ГЁ Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ id, Г±Г®Г®ГІГўГҐГІГ±ГўГіГѕГ№ГЁГ© ГЅГІГ®Г© ГЇГ Г°ГҐ "ГЇГ Г°Г Г¬ГҐГІГ°-Г§Г­Г Г·ГҐГ­ГЁГҐ"
               select
                   d035_attribute.attribute_id
                   into current_id
@@ -263,7 +263,7 @@ create or replace package body COMMENT_PKG is
                 d035_attribute.d035_name = src_attr.parameter 
                 and d035_attribute.d035_value = src_attr.value;
 
-              --вызывается процедура заполнения таблицы b009 с текущими id атрибута и группы атрибутов
+              --ГўГ»Г§Г»ГўГ ГҐГІГ±Гї ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» b009 Г± ГІГҐГЄГіГ№ГЁГ¬ГЁ id Г ГІГ°ГЁГЎГіГІГ  ГЁ ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў
               load_b009(current_id, p_attribute_group_id);
 
               end if;
@@ -274,7 +274,7 @@ create or replace package body COMMENT_PKG is
       end loop;
    end load_d035;
 
-  --процедура заполнения таблицы d033_attribute_group
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» d033_attribute_group
   procedure load_d033 (
       p_parameters in varchar2,
       p_attribute_group_id out d033_attribute_group.attribute_group_id%type
@@ -287,38 +287,38 @@ create or replace package body COMMENT_PKG is
     current_element varchar2(4000) :='';
     current_code varchar2(1024) :='';
   begin
-    --распарсиваем строку с параметрами и их значениями
+    --Г°Г Г±ГЇГ Г°Г±ГЁГўГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ ГЁ ГЁГµ Г§Г­Г Г·ГҐГ­ГЁГїГ¬ГЁ
     current_index := fnc_get_next_word(p_parameters,current_index + 1,';', current_element);
 
     while current_element is not null
       loop
         begin
 
-          --формируем маску типа "p2=", чтобы
-          --впоследствии удалить ее из текущего параметра (оставляем только значение)
+          --ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ Г¬Г Г±ГЄГі ГІГЁГЇГ  "p2=", Г·ГІГ®ГЎГ»
+          --ГўГЇГ®Г±Г«ГҐГ¤Г±ГІГўГЁГЁ ГіГ¤Г Г«ГЁГІГј ГҐГҐ ГЁГ§ ГІГҐГЄГіГ№ГҐГЈГ® ГЇГ Г°Г Г¬ГҐГІГ°Г  (Г®Г±ГІГ ГўГ«ГїГҐГ¬ ГІГ®Г«ГјГЄГ® Г§Г­Г Г·ГҐГ­ГЁГҐ)
           mask := 'p'|| to_char(mask_index) || '=';
 
-          --убираем первый параметр "p0=число", содержащий количество передаваемых параметров
+          --ГіГЎГЁГ°Г ГҐГ¬ ГЇГҐГ°ГўГ»Г© ГЇГ Г°Г Г¬ГҐГІГ° "p0=Г·ГЁГ±Г«Г®", Г±Г®Г¤ГҐГ°Г¦Г Г№ГЁГ© ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГҐГ°ГҐГ¤Г ГўГ ГҐГ¬Г»Гµ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
           if (current_element not like 'p0=%') then
 
             current_element := replace(current_element, mask, '');
-              --и объединяем остальные в строку
+              --ГЁ Г®ГЎГєГҐГ¤ГЁГ­ГїГҐГ¬ Г®Г±ГІГ Г«ГјГ­Г»ГҐ Гў Г±ГІГ°Г®ГЄГі
               current_code := current_code || current_element;
 
             end if;
 
         end;
-        --увеличиваем индекс маски
+        --ГіГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ ГЁГ­Г¤ГҐГЄГ± Г¬Г Г±ГЄГЁ
         mask_index := mask_index + 1;
 
         current_index := fnc_get_next_word(p_parameters,current_index + 1,';', current_element);
 
       end loop;
 
-      --формируем id группы атрибутов из последовательности
+      --ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ id ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў ГЁГ§ ГЇГ®Г±Г«ГҐГ¤Г®ГўГ ГІГҐГ«ГјГ­Г®Г±ГІГЁ
       select seq_dim.nextval into attr_group_id from dual;
 
-      --мерджим записи в таблице d033_attribute_group
+      --Г¬ГҐГ°Г¤Г¦ГЁГ¬ Г§Г ГЇГЁГ±ГЁ Гў ГІГ ГЎГ«ГЁГ¶ГҐ d033_attribute_group
       merge into d033_attribute_group using
           (select
               attr_group_id as id,
@@ -345,8 +345,8 @@ create or replace package body COMMENT_PKG is
 
             commit;
 
-      --находим для текущего комментария id группы атрибутов в таблице d033_attribute_group
-      --и присваиваем переменной на выходе значение этого id
+      --Г­Г ГµГ®Г¤ГЁГ¬ Г¤Г«Гї ГІГҐГЄГіГ№ГҐГЈГ® ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї id ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў Гў ГІГ ГЎГ«ГЁГ¶ГҐ d033_attribute_group
+      --ГЁ ГЇГ°ГЁГ±ГўГ ГЁГўГ ГҐГ¬ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© Г­Г  ГўГ»ГµГ®Г¤ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЅГІГ®ГЈГ® id
       select
         d033_attribute_group.attribute_group_id into p_attribute_group_id
       from
@@ -358,7 +358,7 @@ create or replace package body COMMENT_PKG is
 
   end load_d033;
 
-  --процедура заполнения таблицы f013_comments
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» f013_comments
   procedure load_f013 (
     p_username in varchar2,
     p_report_name in varchar2,
@@ -369,17 +369,17 @@ create or replace package body COMMENT_PKG is
     comments_id  f013_comments.comment_id%type;
     attr_group_id d033_attribute_group.attribute_group_id%type;
   begin
-    --формируем id таблицы f013_comments и заносим ее в переменную comments_id
+    --ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ id ГІГ ГЎГ«ГЁГ¶Г» f013_comments ГЁ Г§Г Г­Г®Г±ГЁГ¬ ГҐГҐ Гў ГЇГҐГ°ГҐГ¬ГҐГ­Г­ГіГѕ comments_id
     select seq_dim.nextval into comments_id from dual;
 
-    --вызываем процедуру загрузки таблицы d033
-    --и возвращаем id группы атрибутов, записываем ее в переменную attr_group_id
+    --ГўГ»Г§Г»ГўГ ГҐГ¬ ГЇГ°Г®Г¶ГҐГ¤ГіГ°Гі Г§Г ГЈГ°ГіГ§ГЄГЁ ГІГ ГЎГ«ГЁГ¶Г» d033
+    --ГЁ ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬ id ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў, Г§Г ГЇГЁГ±Г»ГўГ ГҐГ¬ ГҐГҐ Гў ГЇГҐГ°ГҐГ¬ГҐГ­Г­ГіГѕ attr_group_id
     load_d033(p_parameters, attr_group_id);
 
-    --вызываем процедуру заполнения таблицы d035_attribute
+    --ГўГ»Г§Г»ГўГ ГҐГ¬ ГЇГ°Г®Г¶ГҐГ¤ГіГ°Гі Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГї ГІГ ГЎГ«ГЁГ¶Г» d035_attribute
     load_d035(p_parameters, attr_group_id);
 
-    --заполняем таблицу f013_comments
+    --Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГІГ ГЎГ«ГЁГ¶Гі f013_comments
     insert into f013_comments (
       comment_id,
       attribute_group_id,
@@ -400,7 +400,7 @@ create or replace package body COMMENT_PKG is
     commit;
   end load_f013;
 
-  --стартовая процедура загрузки комментариев
+  --Г±ГІГ Г°ГІГ®ГўГ Гї ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  Г§Г ГЈГ°ГіГ§ГЄГЁ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГҐГў
   procedure write_comment(
     p_username in f013_comments.f013_user%type,
     p_report_name in f013_comments.f013_report_name%type,
@@ -415,7 +415,7 @@ create or replace package body COMMENT_PKG is
   begin
     select seq_operation_log.nextval into opid from dual;
    
-    --запускаем процедуру загрузки f013_comments
+    --Г§Г ГЇГіГ±ГЄГ ГҐГ¬ ГЇГ°Г®Г¶ГҐГ¤ГіГ°Гі Г§Г ГЈГ°ГіГ§ГЄГЁ f013_comments
     l_report_name := fnc_url_decode(p_report_name);
     l_comment := fnc_url_decode(p_comment);
     l_parameters := fnc_url_decode(p_parameters);
@@ -424,32 +424,32 @@ create or replace package body COMMENT_PKG is
 
   end write_comment;
 
-  --функция возврата набора "номер строки, пользователь, комментарий, дата вставки комментария"
+  --ГґГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г ГІГ  Г­Г ГЎГ®Г°Г  "Г­Г®Г¬ГҐГ° Г±ГІГ°Г®ГЄГЁ, ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј, ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГ©, Г¤Г ГІГ  ГўГ±ГІГ ГўГЄГЁ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї"
   function get_comment (
-    --имя отчета
+    --ГЁГ¬Гї Г®ГІГ·ГҐГІГ 
     p_report_name in f013_comments.f013_report_name%type,
-    --входная строка параметров имеет вид p0=2;p1=City;p2=Moscow;p3=Week;p4=53th Week
+    --ГўГµГ®Г¤Г­Г Гї Г±ГІГ°Г®ГЄГ  ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў ГЁГ¬ГҐГҐГІ ГўГЁГ¤ p0=2;p1=City;p2=Moscow;p3=Week;p4=53th Week
     p_parameters in varchar2
   )
   return comment_table_type pipelined
   is
-    --алиасы для входных параметров
+    --Г Г«ГЁГ Г±Г» Г¤Г«Гї ГўГµГ®Г¤Г­Г»Гµ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
     l_report_name f013_comments.f013_report_name%type :='';
     l_parameters f013_comments.f013_comment%type :='';
-    --текст запроса, возвращающего строки из таблицы f013_comments для строки с параметрами
+    --ГІГҐГЄГ±ГІ Г§Г ГЇГ°Г®Г±Г , ГўГ®Г§ГўГ°Г Г№Г ГѕГ№ГҐГЈГ® Г±ГІГ°Г®ГЄГЁ ГЁГ§ ГІГ ГЎГ«ГЁГ¶Г» f013_comments Г¤Г«Гї Г±ГІГ°Г®ГЄГЁ Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
     query varchar2(4000) :='';
-    --динамическая часть запроса (добавляет фильтрацию по текущему атрибуту)
+    --Г¤ГЁГ­Г Г¬ГЁГ·ГҐГ±ГЄГ Гї Г·Г Г±ГІГј Г§Г ГЇГ°Г®Г±Г  (Г¤Г®ГЎГ ГўГ«ГїГҐГІ ГґГЁГ«ГјГІГ°Г Г¶ГЁГѕ ГЇГ® ГІГҐГЄГіГ№ГҐГ¬Гі Г ГІГ°ГЁГЎГіГІГі)
     query_part varchar2(1024) :='';
-    --ID комментария
+    --ID ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
     comment_id number(16);
-    --имя пользователя
+    --ГЁГ¬Гї ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї
     user_name varchar2(128) := '';
-    --текст комментария
+    --ГІГҐГЄГ±ГІ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
     comment_text varchar2(4000) := '';
-    --дата вставки
+    --Г¤Г ГІГ  ГўГ±ГІГ ГўГЄГЁ
     insert_date date;
 
-    /*служебные переменные*/
+    /*Г±Г«ГіГ¦ГҐГЎГ­Г»ГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ*/
     ind number :=0;
     current_element varchar2(1024) := '';
     mask varchar2(64) :='';
@@ -458,15 +458,15 @@ create or replace package body COMMENT_PKG is
     row_number number(5) :=0;
     row_count number :=0;
 
-    --текущие значения пары "название-значение" атрибута
+    --ГІГҐГЄГіГ№ГЁГҐ Г§Г­Г Г·ГҐГ­ГЁГї ГЇГ Г°Г» "Г­Г Г§ГўГ Г­ГЁГҐ-Г§Г­Г Г·ГҐГ­ГЁГҐ" Г ГІГ°ГЁГЎГіГІГ 
     current_parameter varchar2(1024) := '';
     current_value varchar2(1024) := '';
   begin
-    --присваиваем значения алиасам
+    --ГЇГ°ГЁГ±ГўГ ГЁГўГ ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГї Г Г«ГЁГ Г±Г Г¬
     l_report_name := fnc_url_decode(p_report_name);
     l_parameters := fnc_url_decode(p_parameters);
     
-    --задаем значение переменной текста запроса
+    --Г§Г Г¤Г ГҐГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г®Г© ГІГҐГЄГ±ГІГ  Г§Г ГЇГ°Г®Г±Г 
     query := 'select *
               from
               (select
@@ -488,32 +488,32 @@ create or replace package body COMMENT_PKG is
                 and d33.attribute_group_id = b09.attribute_group_id
                 and b09.attribute_id = d32.attribute_id';
 
-    --распарсиваем строку с параметрами
+    --Г°Г Г±ГЇГ Г°Г±ГЁГўГ ГҐГ¬ Г±ГІГ°Г®ГЄГі Г± ГЇГ Г°Г Г¬ГҐГІГ°Г Г¬ГЁ
     ind := fnc_get_next_word(l_parameters, ind + 1, ';', current_element);
     while current_element is not null
       loop
         begin
-          --для каждого current_element формируем маску вида "p[i]="
+          --Г¤Г«Гї ГЄГ Г¦Г¤Г®ГЈГ® current_element ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ Г¬Г Г±ГЄГі ГўГЁГ¤Г  "p[i]="
           mask := 'p' || to_char(mask_index) || '=';
-          --выбираем первый параметр строки "p0=", содерж. количество передаваемых параметров
+          --ГўГ»ГЎГЁГ°Г ГҐГ¬ ГЇГҐГ°ГўГ»Г© ГЇГ Г°Г Г¬ГҐГІГ° Г±ГІГ°Г®ГЄГЁ "p0=", Г±Г®Г¤ГҐГ°Г¦. ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГҐГ°ГҐГ¤Г ГўГ ГҐГ¬Г»Гµ ГЇГ Г°Г Г¬ГҐГІГ°Г®Гў
           if (current_element like 'p0=%') then
             parameters_count := to_number(replace(current_element, 'p0=', ''));
           else
-            --убираем из current_element часть строки по маске
+            --ГіГЎГЁГ°Г ГҐГ¬ ГЁГ§ current_element Г·Г Г±ГІГј Г±ГІГ°Г®ГЄГЁ ГЇГ® Г¬Г Г±ГЄГҐ
             current_element := replace(current_element, mask, '');
-            --каждое название атрибута идет под нечетной маской (p1=)
+            --ГЄГ Г¦Г¤Г®ГҐ Г­Г Г§ГўГ Г­ГЁГҐ Г ГІГ°ГЁГЎГіГІГ  ГЁГ¤ГҐГІ ГЇГ®Г¤ Г­ГҐГ·ГҐГІГ­Г®Г© Г¬Г Г±ГЄГ®Г© (p1=)
             if (mod(mask_index, 2) != 0) then
               current_parameter := current_element;
             else
-              --каждое значение атрибута - под четной маской (p2=)
+              --ГЄГ Г¦Г¤Г®ГҐ Г§Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ°ГЁГЎГіГІГ  - ГЇГ®Г¤ Г·ГҐГІГ­Г®Г© Г¬Г Г±ГЄГ®Г© (p2=)
               current_value := current_element;
-              --если значение идет под маской "p2=" (первый атрибут), то мы добавляем в предикат условия:
+              --ГҐГ±Г«ГЁ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЁГ¤ГҐГІ ГЇГ®Г¤ Г¬Г Г±ГЄГ®Г© "p2=" (ГЇГҐГ°ГўГ»Г© Г ГІГ°ГЁГЎГіГІ), ГІГ® Г¬Г» Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Гў ГЇГ°ГҐГ¤ГЁГЄГ ГІ ГіГ±Г«Г®ГўГЁГї:
               if (mask_index = 2) then
                 query_part := '
                   and d32.d035_name = ''' || current_parameter || '''
                   and d32.d035_value = ''' || current_element || '''';
               else
-                --наличие последующих атрибутов добавляем в предикат "and exists()"
+                --Г­Г Г«ГЁГ·ГЁГҐ ГЇГ®Г±Г«ГҐГ¤ГіГѕГ№ГЁГµ Г ГІГ°ГЁГЎГіГІГ®Гў Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Гў ГЇГ°ГҐГ¤ГЁГЄГ ГІ "and exists()"
                 query_part :=' and exists (
                     select 1
                     from
@@ -526,7 +526,7 @@ create or replace package body COMMENT_PKG is
                       and attr_1.d035_value = ''' || current_element || ''')';
                end if;
 
-              --формируем запрос, конкатенируя с текущей частью
+              --ГґГ®Г°Г¬ГЁГ°ГіГҐГ¬ Г§Г ГЇГ°Г®Г±, ГЄГ®Г­ГЄГ ГІГҐГ­ГЁГ°ГіГї Г± ГІГҐГЄГіГ№ГҐГ© Г·Г Г±ГІГјГѕ
               query := query || query_part;
 
             end if;
@@ -536,19 +536,19 @@ create or replace package body COMMENT_PKG is
         ind := fnc_get_next_word(l_parameters, ind + 1, ';', current_element);
       end loop;
 
-    --завершаем запрос окончанием конструкции "select * from (select smth from tables) d"
+    --Г§Г ГўГҐГ°ГёГ ГҐГ¬ Г§Г ГЇГ°Г®Г± Г®ГЄГ®Г­Г·Г Г­ГЁГҐГ¬ ГЄГ®Г­Г±ГІГ°ГіГЄГ¶ГЁГЁ "select * from (select smth from tables) d"
     query := query || ' ) d';
 
-    --подсчитываем количество возвращаемых строк
+    --ГЇГ®Г¤Г±Г·ГЁГІГ»ГўГ ГҐГ¬ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г»Гµ Г±ГІГ°Г®ГЄ
     execute immediate 'select count(*) from ('|| query || ')' into row_count;
 
-    --добавляем в запрос предикат для вывода определенной строки возвращаемой таблицы
+    --Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Гў Г§Г ГЇГ°Г®Г± ГЇГ°ГҐГ¤ГЁГЄГ ГІ Г¤Г«Гї ГўГ»ГўГ®Г¤Г  Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­Г­Г®Г© Г±ГІГ°Г®ГЄГЁ ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г®Г© ГІГ ГЎГ«ГЁГ¶Г»
     query := query || ' where d.order_num = :1';
 
-    --выводим строки таблицы
-    --(!)при этом при выводе (в pipe row) заменям спецсимволы с помощью функции fnc_symb_replace
+    --ГўГ»ГўГ®Г¤ГЁГ¬ Г±ГІГ°Г®ГЄГЁ ГІГ ГЎГ«ГЁГ¶Г»
+    --(!)ГЇГ°ГЁ ГЅГІГ®Г¬ ГЇГ°ГЁ ГўГ»ГўГ®Г¤ГҐ (Гў pipe row) Г§Г Г¬ГҐГ­ГїГ¬ Г±ГЇГҐГ¶Г±ГЁГ¬ГўГ®Г«Г» Г± ГЇГ®Г¬Г®Г№ГјГѕ ГґГіГ­ГЄГ¶ГЁГЁ fnc_symb_replace
     if row_count is null or row_count = 0 then
-      pipe row (comment_return_type(1, -1,'user', 'Комментарии отсутствуют', sysdate));
+      pipe row (comment_return_type(1, -1,'user', 'ГЉГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГЁ Г®ГІГ±ГіГІГ±ГІГўГіГѕГІ', sysdate));
     else
       for i in 1 .. row_count
         loop
@@ -561,8 +561,8 @@ create or replace package body COMMENT_PKG is
 
   end get_comment;
 
-  --процедура удаления комментария
-  --параметры: пользователь дата добавления комментария, название отчета, текст комментария
+  --ГЇГ°Г®Г¶ГҐГ¤ГіГ°Г  ГіГ¤Г Г«ГҐГ­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
+  --ГЇГ Г°Г Г¬ГҐГІГ°Г»: ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј Г¤Г ГІГ  Г¤Г®ГЎГ ГўГ«ГҐГ­ГЁГї ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї, Г­Г Г§ГўГ Г­ГЁГҐ Г®ГІГ·ГҐГІГ , ГІГҐГЄГ±ГІ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
   procedure delete_comment (
     p_username in f013_comments.f013_user%type,
     p_comment_id in f013_comments.comment_id%type
@@ -570,7 +570,7 @@ create or replace package body COMMENT_PKG is
   is
   
   begin
-    --удаляем запись с выбранным id комментария
+    --ГіГ¤Г Г«ГїГҐГ¬ Г§Г ГЇГЁГ±Гј Г± ГўГ»ГЎГ°Г Г­Г­Г»Г¬ id ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї
     delete from f013_comments
     where
       f013_comments.comment_id = p_comment_id
