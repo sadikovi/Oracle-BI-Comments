@@ -1,4 +1,4 @@
---тип, определяющий формат возвращаемых данных для функции get_comment пакета COMMENT_PKG
+--ГІГЁГЇ, Г®ГЇГ°ГҐГ¤ГҐГ«ГїГѕГ№ГЁГ© ГґГ®Г°Г¬Г ГІ ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г»Гµ Г¤Г Г­Г­Г»Гµ Г¤Г«Гї ГґГіГ­ГЄГ¶ГЁГЁ get_comment ГЇГ ГЄГҐГІГ  COMMENT_PKG
 create or replace type comment_return_type
 as object (
   row_count number(5),
