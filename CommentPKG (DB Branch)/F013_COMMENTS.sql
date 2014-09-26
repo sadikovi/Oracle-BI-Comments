@@ -14,25 +14,25 @@ create table F013_COMMENTS
 );
 
 comment on table F013_COMMENTS is
-'Таблица комментариев';
+'Г’Г ГЎГ«ГЁГ¶Г  ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГҐГў';
 
 comment on column F013_COMMENTS.COMMENT_ID is
-'ID комментария';
+'ID ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї';
 
 comment on column F013_COMMENTS.ATTRIBUTE_GROUP_ID is
-'ID группы атрибутов';
+'ID ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 comment on column F013_COMMENTS.F013_REPORT_NAME is
-'Название таблицы';
+'ГЌГ Г§ГўГ Г­ГЁГҐ ГІГ ГЎГ«ГЁГ¶Г»';
 
 comment on column F013_COMMENTS.F013_USER is
-'Пользователь, добавивший комментарий';
+'ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј, Г¤Г®ГЎГ ГўГЁГўГёГЁГ© ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГ©';
 
 comment on column F013_COMMENTS.F013_COMMENT is
-'Комментарий пользователя';
+'ГЉГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГ© ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї';
 
 comment on column F013_COMMENTS.F013_INSERT_DATE is
-'Дата вставки комментария';
+'Г„Г ГІГ  ГўГ±ГІГ ГўГЄГЁ ГЄГ®Г¬Г¬ГҐГ­ГІГ Г°ГЁГї';
 
 alter table F013_COMMENTS
    add constraint FK_F013_D033 foreign key (ATTRIBUTE_GROUP_ID)
