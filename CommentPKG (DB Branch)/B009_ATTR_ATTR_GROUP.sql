@@ -10,13 +10,13 @@ create table B009_ATTR_ATTR_GROUP
 );
 
 comment on table B009_ATTR_ATTR_GROUP is
-'Таблица связи атрибутов с группами атрибутов';
+'Г’Г ГЎГ«ГЁГ¶Г  Г±ГўГїГ§ГЁ Г ГІГ°ГЁГЎГіГІГ®Гў Г± ГЈГ°ГіГЇГЇГ Г¬ГЁ Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 comment on column B009_ATTR_ATTR_GROUP.ATTRIBUTE_ID is
-'ID атрибута';
+'ID Г ГІГ°ГЁГЎГіГІГ ';
 
 comment on column B009_ATTR_ATTR_GROUP.ATTRIBUTE_GROUP_ID is
-'ID группы атрибутов';
+'ID ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 alter table B009_ATTR_ATTR_GROUP
    add constraint FK_B009_D035 foreign key (ATTRIBUTE_ID)
