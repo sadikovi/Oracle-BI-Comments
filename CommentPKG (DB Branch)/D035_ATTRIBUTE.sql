@@ -17,13 +17,13 @@ create unique index UI_D035_ATTRIBURE_NAME_VALUE on d035_attribute(d035_name, d0
 	tablespace LOGISTICS_TBS;
 
 comment on table D035_ATTRIBUTE is
-'Справочник атрибутов';
+'Г‘ГЇГ°Г ГўГ®Г·Г­ГЁГЄ Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 comment on column D035_ATTRIBUTE.ATTRIBUTE_ID is
-'ID атрибута';
+'ID Г ГІГ°ГЁГЎГіГІГ ';
 
 comment on column D035_ATTRIBUTE.D035_NAME is
-'Название атрибута';
+'ГЌГ Г§ГўГ Г­ГЁГҐ Г ГІГ°ГЁГЎГіГІГ ';
 
 comment on column D035_ATTRIBUTE.D035_VALUE is
-'Значение атрибута';
+'Г‡Г­Г Г·ГҐГ­ГЁГҐ Г ГІГ°ГЁГЎГіГІГ ';
