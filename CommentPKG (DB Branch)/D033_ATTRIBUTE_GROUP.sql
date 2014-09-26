@@ -13,12 +13,12 @@ create table D033_ATTRIBUTE_GROUP
 );
 
 comment on table D033_ATTRIBUTE_GROUP is
-'Справочник групп атрибутов';
+'Г‘ГЇГ°Г ГўГ®Г·Г­ГЁГЄ ГЈГ°ГіГЇГЇ Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 comment on column D033_ATTRIBUTE_GROUP.ATTRIBUTE_GROUP_ID is
-'ID группы атрибутов';
+'ID ГЈГ°ГіГЇГЇГ» Г ГІГ°ГЁГЎГіГІГ®Гў';
 
 comment on column D033_ATTRIBUTE_GROUP.D033_GROUP_CD is
-'Код группы';
+'ГЉГ®Г¤ ГЈГ°ГіГЇГЇГ»';
 
 grant select on logistics.d033_attribute_group to LOGISTICS_ACCESS;
